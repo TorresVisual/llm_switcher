@@ -19,7 +19,16 @@ from pystray import MenuItem, Menu
 import tkinter as tk
 
 APP_DIR     = Path(sys.executable).parent if getattr(sys, "frozen", False) else Path(__file__).parent
-CONFIG_PATH = APP_DIR / "config.json"
+ANTIGRAVITY_EXE = Path(r"C:\Users\Moritz\AppData\Local\Programs\Antigravity\Antigravity.exe")
+BASE_DIR = Path(r"D:\Coding\Apps\llm_switcher")
+
+
+if getattr(sys, 'frozen', False):
+    base_path = Path(sys.executable).parent
+else:
+    base_path = Path(__file__).parent
+
+CONFIG_PATH = base_path / "config.json"
 
 SERVICES = {
     "ChatGPT":        ("https://chat.openai.com/",     "#10a37f"),
@@ -275,7 +284,11 @@ def toggle_popup(root, chrome, active, profiles, click_xy):
 
     def open_cfg():
         close()
-        os.startfile(str(CONFIG_PATH))
+        subprocess.Popen([
+            str(ANTIGRAVITY_EXE),
+            str(BASE_DIR),
+            str(CONFIG_PATH)
+        ])
 
     tk.Button(body, text="⚙  Edit Config", command=open_cfg,
               bg=HEADER, fg=MUTED, relief="flat", font=("Segoe UI", 8),
