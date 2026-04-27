@@ -290,7 +290,7 @@ def toggle_popup(root, chrome, active, profiles, click_xy):
             str(CONFIG_PATH)
         ])
 
-    tk.Button(body, text="⚙  Edit Config", command=open_cfg,
+    tk.Button(body, text="Edit Config", command=open_cfg,
               bg=HEADER, fg=MUTED, relief="flat", font=("Segoe UI", 8),
               activebackground=CARD, activeforeground=FG,
               cursor="hand2", bd=0, padx=12, pady=9).pack(fill="x")
@@ -332,7 +332,11 @@ def main():
             f"Your Chrome profiles:\n{lines}\n\n"
             "Edit config.json to map services to profiles, then restart."
         )
-        os.startfile(str(CONFIG_PATH))
+        subprocess.Popen([
+            str(ANTIGRAVITY_EXE),
+            str(BASE_DIR),
+            str(CONFIG_PATH)
+        ])
         sys.exit(0)
 
     active = {
@@ -341,7 +345,11 @@ def main():
     }
     if not active:
         alert(f"No services configured.\n\nEdit:\n{CONFIG_PATH}")
-        os.startfile(str(CONFIG_PATH))
+        subprocess.Popen([
+            str(ANTIGRAVITY_EXE),
+            str(BASE_DIR),
+            str(CONFIG_PATH)
+        ])
         sys.exit(1)
 
     root = tk.Tk()
@@ -362,7 +370,11 @@ def main():
         Menu(
             MenuItem("Open Switcher", on_click, default=True),
             Menu.SEPARATOR,
-            MenuItem("Edit Config", lambda i, it: os.startfile(str(CONFIG_PATH))),
+            MenuItem("Edit Config", lambda i, it: subprocess.Popen([
+            str(ANTIGRAVITY_EXE),
+            str(BASE_DIR),
+            str(CONFIG_PATH)
+        ])),
             MenuItem("Exit",        on_exit),
         ),
     )

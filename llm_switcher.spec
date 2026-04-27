@@ -5,7 +5,7 @@ a = Analysis(
     ['llm_switcher.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[('C:\\Users\\Moritz\\AppData\\Local\\Programs\\Python\\Python311\\tcl\\tcl8.6', '_tcl_data'), ('C:\\Users\\Moritz\\AppData\\Local\\Programs\\Python\\Python311\\tcl\\tk8.6', '_tk_data')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
